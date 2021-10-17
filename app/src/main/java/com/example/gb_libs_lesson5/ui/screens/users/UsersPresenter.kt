@@ -40,7 +40,7 @@ class UsersPresenter(
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { itemView ->
-            router.navigateTo(AndroidScreens.RepoScreen(usersListPresenter.users[itemView.pos].login!!))
+            router.navigateTo(AndroidScreens.RepoScreen(usersListPresenter.users[itemView.pos].reposUrl!!))
         }
 
     }

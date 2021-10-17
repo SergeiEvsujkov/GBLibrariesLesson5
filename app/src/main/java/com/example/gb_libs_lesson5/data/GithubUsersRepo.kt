@@ -7,6 +7,6 @@ class GithubUsersRepo {
 }
 
 class GithubRepo {
-    fun getRepo(login : String) = ApiHolder.apiServiceRepo(login).getRepo()
+    fun getRepo(repos_url : String) = ApiHolder.apiServiceRepo.getRepo(repos_url)
 }
 

@@ -16,7 +16,7 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
 class RepoPresenter(
-    private val login: String,
+    private val reposUrl: String,
     private val repo: GithubRepo,
     private val router: Router,
 
@@ -60,7 +60,7 @@ class RepoPresenter(
     }
 
     private fun loadData() {
-        repo.getRepo(login)
+        repo.getRepo(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ users ->

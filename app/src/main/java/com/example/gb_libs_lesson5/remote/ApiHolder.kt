@@ -22,15 +22,15 @@ object ApiHolder {
         .excludeFieldsWithoutExposeAnnotation()
         .create()
 
-    fun apiServiceRepo(login: String): GithubRepoService =
+    val apiServiceRepo: GithubRepoService by lazy {
 
 
         Retrofit.Builder()
-            .baseUrl("https://api.github.com/users/$login/")
+            .baseUrl("https://api.github.com")
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(GithubRepoService::class.java)
-
+    }
 
 }

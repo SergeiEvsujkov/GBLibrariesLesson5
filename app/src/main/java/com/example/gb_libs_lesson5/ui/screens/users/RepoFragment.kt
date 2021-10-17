@@ -20,12 +20,12 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-private const val LOGIN = "login"
+private const val REPOS_URL = "repos_url"
 
 
 class RepoFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private var login: String? = ""
+    private var reposUrl: String? = ""
     private var vb: FragmentRepoBinding? = null
 
 
@@ -33,14 +33,14 @@ class RepoFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            login = it.getString(LOGIN)
+            reposUrl = it.getString(REPOS_URL)
 
         }
     }
-    private val presenter by moxyPresenter { RepoPresenter(arguments?.getString(LOGIN)!!, GithubRepo(), App.instance.router) }
+    private val presenter by moxyPresenter { RepoPresenter(arguments?.getString(REPOS_URL)!!, GithubRepo(), App.instance.router) }
     private val adapter by lazy {
         RepoRVAdapter(
-            arguments?.getString(LOGIN)!!,
+            arguments?.getString(REPOS_URL)!!,
             presenter.repoListPresenter,
             )
     }
@@ -57,10 +57,10 @@ class RepoFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     companion object {
 
         @JvmStatic
-        fun newInstance(login: String) =
+        fun newInstance(reposUrl: String) =
             RepoFragment().apply {
                 arguments = Bundle().apply {
-                    putString(LOGIN, login)
+                    putString(REPOS_URL, reposUrl)
                 }
             }
     }
