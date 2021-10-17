@@ -16,4 +16,19 @@ data class GithubUser(
     @Expose
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
+
+    @Expose
+    @SerializedName("repos_url")
+    val reposUrl: String? = null,
+) : Parcelable
+
+@Parcelize
+data class GithubUserRepo(
+    @Expose
+    val name: String? = null,
+    @Expose
+    val language: String? = null,
+
+    @Expose
+    val size: String? = null,
 ) : Parcelable
