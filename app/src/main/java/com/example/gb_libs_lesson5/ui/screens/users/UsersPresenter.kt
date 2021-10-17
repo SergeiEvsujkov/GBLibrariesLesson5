@@ -3,6 +3,7 @@ package com.example.gb_libs_lesson5.ui.screens.users
 import android.util.Log
 import com.example.gb_libs_lesson5.data.GithubUser
 import com.example.gb_libs_lesson5.data.GithubUsersRepo
+import com.example.gb_libs_lesson5.navigation.AndroidScreens
 import com.example.gb_libs_lesson5.ui.items.IUserListPresenter
 import com.example.gb_libs_lesson5.ui.screens.users.adapter.UserItemView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,7 +16,7 @@ class UsersPresenter(
     private val router: Router,
 ) : MvpPresenter<UsersView>() {
 
-    class UsersListPresenter : IUserListPresenter {
+    inner class UsersListPresenter : IUserListPresenter {
 
         val users = mutableListOf<GithubUser>()
 
@@ -27,6 +28,7 @@ class UsersPresenter(
             val user = users[view.pos]
             view.showLogin(user.login.orEmpty())
             view.loadAvatar(user.avatarUrl.orEmpty())
+
         }
     }
 
@@ -37,10 +39,10 @@ class UsersPresenter(
 
         viewState.init()
         loadData()
-
         usersListPresenter.itemClickListener = { itemView ->
-            // todo
+            router.navigateTo(AndroidScreens.RepoScreen(usersListPresenter.users[itemView.pos].login!!))
         }
+
     }
 
     private fun loadData() {
